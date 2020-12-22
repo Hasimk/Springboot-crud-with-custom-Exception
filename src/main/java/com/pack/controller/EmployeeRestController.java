@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pack.model.Employee;
 import com.pack.service.IEmployeeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+
+@Api(value = "Controller for employee")
 @RestController
 @RequestMapping("/employees")
 public class EmployeeRestController {
@@ -25,6 +32,13 @@ public class EmployeeRestController {
     private IEmployeeService service;
     
     //1. save 
+    
+    
+    @ApiOperation(value = "Post save APi test")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
     
     @PostMapping("/save")
     public ResponseEntity<String> saveEmployee(@RequestBody Employee employee){
@@ -38,6 +52,12 @@ public class EmployeeRestController {
     
    // 2. fetch all
     
+    @ApiOperation(value = "Get all emplyee APi ")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
+    
     @GetMapping("/all")
     public ResponseEntity<List<Employee >> getAllEmployee(){
         
@@ -47,6 +67,11 @@ public class EmployeeRestController {
         
     }
    // 3. fetch one
+    @ApiOperation(value = "get one employee")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
     @GetMapping("/one/{id}")
     public ResponseEntity<Employee> getOneEmployee(@PathVariable Integer id){
         
@@ -57,7 +82,11 @@ public class EmployeeRestController {
     }
     
     //4. delete
-    
+    @ApiOperation(value = "delete  APi ")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Integer id){
         
